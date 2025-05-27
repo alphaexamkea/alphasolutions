@@ -9,7 +9,7 @@
         </ul>
         <div class="nav-user">
             <span th:if="${session.username != null}">
-                <a th:href="@{/logout}" class="logout-btn">Log ud</a>
+                <a th:href="@{/logout}" class="logout-btn">Log out</a>
             </span>
             <span th:unless="${session.username != null}">
                 <a th:href="@{/login}">Login</a>
