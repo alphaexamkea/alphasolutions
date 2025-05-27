@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Login</title>
@@ -10,21 +10,21 @@
 <div class="login-container">
 
   <form action="/login" method="post" class="login-form">
-    <h2>Log ind</h2>
+    <h2>Log in</h2>
 
-    <label for="username">Brugernavn</label>
+    <label for="username">Username</label>
     <input type="text" id="username" name="username" required>
 
-    <label for="password">Adgangskode</label>
+    <label for="password">Password</label>
     <input type="password" id="password" name="password" required>
 
-    <button type="submit">Log ind</button>
+    <button type="submit">Log in</button>
 
     <p class="error">
-      <span th:if="${wrongCredentials}">Forkert brugernavn eller adgangskode.</span>
+      <span th:if="${wrongCredentials}">Wrong username or password.</span>
     </p>
     <p style="text-align: center; margin-top: 15px;">
-        Har du ikke en bruger? <a th:href="@{/createUser}">Opret bruger her</a>
+        Don't have an account? <a th:href="@{/createUser}">Create user here</a>
     </p>
   </form>
 </div>
