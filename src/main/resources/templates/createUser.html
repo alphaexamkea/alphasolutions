@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Opret Bruger</title>
+    <title>Create User</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
@@ -10,17 +10,17 @@
 <div class="login-container">
 
     <form action="/createUser" method="post" class="login-form">
-        <h2>Opret Bruger</h2>
+        <h2>Create User</h2>
 
-        <label for="username">Brugernavn</label>
+        <label for="username">Username</label>
         <input type="text" id="username" name="username" required>
 
-        <label for="password">Adgangskode</label>
+        <label for="password">Password</label>
         <input type="password" id="password" name="password" required>
 
    
 
-        <button type="submit">Opret bruger</button>
+        <button type="submit">Create user</button>
 
     </form>
 </div>
