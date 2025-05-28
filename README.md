@@ -2,6 +2,8 @@
 
 A Spring Boot-based project management application that allows users to manage projects, subprojects, and tasks with time tracking capabilities.
 
+HOSTED SOLUTION: https://alphasolutions8-fzbbd8bebmawhbam.northeurope-01.azurewebsites.net/
+
 ## 🚀 Features
 
 - **User Management**: User authentication and role-based access
@@ -142,9 +144,6 @@ Once the application is running, you can access it at:
 ```bash
 # Run all tests
 ./mvnw test
-
-# Run tests with coverage
-./mvnw test jacoco:report
 ```
 
 ### Test Database
@@ -187,74 +186,4 @@ spring.datasource.password=${JDBC_DATABASE_PASSWORD}
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 ```
 
-### Environment Variables
 
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `JDBC_DATABASE_URL` | Database connection URL | `jdbc:mysql://localhost:3306/alphasolutions` |
-| `JDBC_DATABASE_USERNAME` | Database username | `alphauser` |
-| `JDBC_DATABASE_PASSWORD` | Database password | `alphapassword` |
-
-## 🚀 Deployment
-
-### Building for Production
-
-```bash
-# Create executable JAR
-./mvnw clean package
-
-# Run the JAR file
-java -jar target/AlphaSolutions-0.0.1-SNAPSHOT.jar
-```
-
-### Docker Deployment (Optional)
-
-You can create a Dockerfile for containerized deployment:
-
-```dockerfile
-FROM openjdk:17-jdk-slim
-COPY target/AlphaSolutions-0.0.1-SNAPSHOT.jar app.jar
-EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/app.jar"]
-```
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🆘 Troubleshooting
-
-### Common Issues
-
-1. **Database Connection Issues**:
-   - Ensure MySQL is running
-   - Verify environment variables are set correctly
-   - Check database credentials and permissions
-
-2. **Port Already in Use**:
-   - Change the port in `application.properties`: `server.port=8081`
-   - Or kill the process using port 8080: `lsof -ti:8080 | xargs kill -9`
-
-3. **Maven Build Issues**:
-   - Ensure Java 17 is installed and set as JAVA_HOME
-   - Clear Maven cache: `./mvnw dependency:purge-local-repository`
-
-### Getting Help
-
-If you encounter any issues:
-1. Check the application logs for error messages
-2. Verify all prerequisites are installed correctly
-3. Ensure environment variables are set properly
-4. Check database connectivity
-
-## 📞 Support
-
-For support and questions, please open an issue in the repository or contact the development team. 
