@@ -6,7 +6,7 @@ name: Build and deploy JAR app to Azure Web App - alphasolutions8
 on:
   push:
     branches:
-      - main
+      - DEPLOY
   workflow_dispatch:
 
 jobs:
