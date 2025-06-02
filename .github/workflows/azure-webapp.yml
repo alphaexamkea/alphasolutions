@@ -5,14 +5,13 @@ name: Build, configure and deploy JAR app to Azure Web App - alphasolutions8
 
 on:
   push:
-    branches: [ main ]
+    branches: [ deployversion ]     # <-- ændret fra main til deployversion
   workflow_dispatch:
 
-# Miljø-variabler – kun brugt i workflow-context for læsbarhed
 env:
-  SPRING_DATASOURCE_URL:      ${{ secrets.AZURE_SQL_URL }}
-  SPRING_DATASOURCE_USERNAME: ${{ secrets.AZURE_SQL_USERNAME }}
-  SPRING_DATASOURCE_PASSWORD: ${{ secrets.AZURE_SQL_PASSWORD }}
+  SPRING_DATASOURCE_URL:      ${{ secrets.SPRING_DATASOURCE_URL }}
+  SPRING_DATASOURCE_USERNAME: ${{ secrets.SPRING_DATASOURCE_USERNAME }}
+  SPRING_DATASOURCE_PASSWORD: ${{ secrets.SPRING_DATASOURCE_PASSWORD }}
 
 jobs:
 # -----------------------------------------------------------
@@ -21,7 +20,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read        # krævet af actions/checkout
+      contents: read
     steps:
       - uses: actions/checkout@v4
 
@@ -50,7 +49,7 @@ jobs:
       name: Production
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write        # nødvendig for OIDC-login
+      id-token: write
       contents: read
 
     steps:
@@ -70,25 +69,25 @@ jobs:
       # Sæt App-settings + Connection-string på webappen
       # -----------------------------------------------------
       - name: Configure App settings & connection strings
-        uses: Azure/appservice-settings@v1   # officiel action  [oai_citation:0‡GitHub](https://github.com/MicrosoftDocs/azure-docs/blob/main/articles/app-service/deploy-github-actions.md?utm_source=chatgpt.com)
+        uses: Azure/appservice-settings@v1
         with:
           app-name: 'alphasolutions8'
           slot-name: 'Production'
           app-settings-json: |
             [
-              { "name": "SPRING_DATASOURCE_URL",      "value": "${{ secrets.AZURE_SQL_URL }}" },
-              { "name": "SPRING_DATASOURCE_USERNAME", "value": "${{ secrets.AZURE_SQL_USERNAME }}" },
-              { "name": "SPRING_DATASOURCE_PASSWORD", "value": "${{ secrets.AZURE_SQL_PASSWORD }}" }
+              { "name": "SPRING_DATASOURCE_URL",      "value": "${{ secrets.SPRING_DATASOURCE_URL }}" },
+              { "name": "SPRING_DATASOURCE_USERNAME", "value": "${{ secrets.SPRING_DATASOURCE_USERNAME }}" },
+              { "name": "SPRING_DATASOURCE_PASSWORD", "value": "${{ secrets.SPRING_DATASOURCE_PASSWORD }}" }
             ]
           connection-strings-json: |
             [
               { "name": "DefaultConnection",
-                "value": "${{ secrets.AZURE_SQL_URL }};user=${{ secrets.AZURE_SQL_USERNAME }};password=${{ secrets.AZURE_SQL_PASSWORD }};",
-                "type": "SQLAzure"
+                "value": "${{ secrets.SPRING_DATASOURCE_URL }};user=${{ secrets.SPRING_DATASOURCE_USERNAME }};password=${{ secrets.SPRING_DATASOURCE_PASSWORD }};",
+                "type": "MySql"
               }
             ]
 
-      # (valgfrit) Flyway/Liquibase-migrering kan indsættes her
+      # (valgfrit) Flyway/Liquibase migrations kan indsættes her
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
