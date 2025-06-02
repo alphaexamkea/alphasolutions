@@ -63,7 +63,6 @@ jobs:
         with:
           client-id:      ${{ secrets.AZUREAPPSERVICE_CLIENTID_C4438B5D209B47C98018957A8AD7E319 }}
           tenant-id:      ${{ secrets.AZUREAPPSERVICE_TENANTID_7FEE318474BF40218949F9724B41CB08 }}
-          subscription-id:${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_B7F51401A4E34DE09696610274180055 }}
 
       # -----------------------------------------------------
       # Sæt App-settings + Connection-string på webappen
